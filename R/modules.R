@@ -30,6 +30,9 @@ createSessionProxy <- function(parentSession, ...) {
   # (e.g. it allows something like `session$userData$x <- TRUE`,
   # but not `session$userData <- TRUE`) from within a module
   # without any hacks (see PR #1732)
+  if ("themeDependencyFuncs" %in% names(value)) {
+    return(x)
+  }
   if (identical(x[[name]], value)) return(x)
   stop("Attempted to assign value on session proxy.")
 }
